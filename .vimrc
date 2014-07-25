@@ -11,18 +11,31 @@ set expandtab
 set textwidth=79
 set encoding=utf-8
 set formatoptions=tcql
+
 "spellchecking
 set nospell
 set spelllang=en,de_de
 set spellfile=~/.vim/spellfile.add
-"change color after 80 chars
-set colorcolumn=80
+ 
+"color line at 80 chars
+if exists('+colorcolumn')
+    set colorcolumn=80
+else
+    au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+endif
+
+"highlight trailing whitspaces
+highlight WhitespaceEOL ctermbg=Red guibg=Red
+match WhitespaceEOL /\s\+$/
+
 "reread if file is modified outside of vim
 set autoread
+
 "scrolloff
 set so=7
 set ignorecase
 set smartcase
+
 "highlight cursorline
 set cul
 set autoindent
@@ -30,6 +43,7 @@ set history=500
 set hlsearch
 set ruler
 set viminfo='20,\"50
+
 "Line numbers
 set number
 set nocompatible    
@@ -55,8 +69,10 @@ let g:Tex_DefaultTargetFormat='pdf'
 let g:Tex_FoldedSections = ''
 let g:Tex_GotoError=1
 let g:tex_comment_nospell=1
+
 "disable placeholders
 "let g:Imap_UsePlaceHolders = 0
+
 let mapleader = ","
 
 "colorschemes
@@ -67,6 +83,3 @@ highlight SpellBad ctermfg=166
 
 "enable pathogen
 execute pathogen#infect()
-"rebind keys
-"-----------------------------
-
