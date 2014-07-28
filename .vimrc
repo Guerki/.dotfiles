@@ -11,6 +11,7 @@ set expandtab
 set textwidth=79
 set encoding=utf-8
 set formatoptions=tcql
+set laststatus=2
 
 "spellchecking
 set nospell
@@ -55,11 +56,17 @@ set modeline
 set showmatch
 syntax enable
 syntax on
-filetype indent plugin on
+filetype plugin indent on
 
 " Cool tab completion stuff
 set wildmenu
 set wildmode=list:longest,full
+
+" Press Space to turn off highlighting and clear any message already displayed.
+:nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
+
+"Powerline
+set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 
 " latex suite
 set grepprg=grep\ -nH\ $*
@@ -83,3 +90,5 @@ highlight SpellBad ctermfg=166
 
 "enable pathogen
 execute pathogen#infect()
+execute pathogen#helptags()
+
