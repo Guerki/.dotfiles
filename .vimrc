@@ -11,13 +11,12 @@ set expandtab
 set textwidth=79
 set encoding=utf-8
 set formatoptions=tcql
-set laststatus=2
 
 "spellchecking
 set nospell
 set spelllang=en,de_de
 set spellfile=~/.vim/spellfile.add
- 
+
 "color line at 80 chars
 if exists('+colorcolumn')
     set colorcolumn=80
@@ -25,12 +24,23 @@ else
     au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
 endif
 
+" make :W to :w 
+cnoreabbrev W w
+
 "highlight trailing whitspaces
-highlight WhitespaceEOL ctermbg=Red guibg=Red
-match WhitespaceEOL /\s\+$/
+"highlight WhitespaceEOL ctermbg=128 guibg=Red
+"match WhitespaceEOL /\s\+$/
+"autocmd ColorScheme * highlight WhitespaceEOL ctermbg=128 guibg=Red
 
 "reread if file is modified outside of vim
 set autoread
+
+" automatically reload vimrc when it's saved
+au BufWritePost .vimrc so ~/.vimrc
+
+"very magic regexes
+nnoremap / /\v
+vnoremap / /\v
 
 "scrolloff
 set so=7
@@ -47,16 +57,21 @@ set viminfo='20,\"50
 
 "Line numbers
 set number
-set nocompatible    
+
+set nocompatible
 set smarttab
 set wrapmargin=5
 set foldenable
 set foldmethod=indent
 set modeline
 set showmatch
+
 syntax enable
 syntax on
 filetype plugin indent on
+
+"enable python highlighting for .py3
+au BufNewFile,BufRead *.py3 set filetype=python
 
 " Cool tab completion stuff
 set wildmenu
@@ -66,6 +81,7 @@ set wildmode=list:longest,full
 :nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 
 "Powerline
+set laststatus=2
 set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 
 " latex suite
@@ -79,8 +95,14 @@ let g:tex_comment_nospell=1
 
 "disable placeholders
 "let g:Imap_UsePlaceHolders = 0
-
+"Key remappings
+"-----------------------------------------
+"remap mapleader to comma
 let mapleader = ","
+
+" Jump to start and end of line using the home row keys
+map H ^
+map L $
 
 "colorschemes
 colorscheme vimbrant
@@ -92,3 +114,7 @@ highlight SpellBad ctermfg=166
 execute pathogen#infect()
 execute pathogen#helptags()
 
+"options for python highlighing
+let python_highlight_indent_errors = 0
+let python_highlight_space_errors = 0
+let python_highlight_all = 1
