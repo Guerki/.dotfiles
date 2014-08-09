@@ -21,11 +21,15 @@ ZSH_THEME="dieter"
 	alias byebye='sudo shutdown -hP now'
     alias cusoon='sudo shutdown -r now'
     alias show='xdg-open'
+
+#set numpad to decimal dot and not comma
+    setxkbmap -option '' -option kpdl:dot
+
 # why would you type 'cd dir' if you could just type 'dir'?
 	setopt AUTO_CD
 
 # Uncomment following line if you want red dots to be displayed while waiting for completion
-# COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS="true"
 
 #256color terminal
 export TERM=xterm-256color
