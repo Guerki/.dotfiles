@@ -8,7 +8,7 @@ set backspace=2
 set shiftwidth=4
 set tabstop=4
 set expandtab
-set textwidth=79
+"set textwidth=79
 set encoding=utf-8
 set formatoptions=tcql
 
@@ -17,12 +17,15 @@ set nospell
 set spelllang=en,de_de
 set spellfile=~/.vim/spellfile.add
 
+"relative numbers
+set relativenumber
+
 "color line at 80 chars
-if exists('+colorcolumn')
-    set colorcolumn=80
-else
-    au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
-endif
+"if exists('+colorcolumn')
+"    set colorcolumn=80
+"else
+"    au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+"endif
 
 " make :W to :w 
 cnoreabbrev W w
@@ -70,9 +73,6 @@ syntax enable
 syntax on
 filetype plugin indent on
 
-"enable python highlighting for .py3
-au BufNewFile,BufRead *.py3 set filetype=python
-
 " Cool tab completion stuff
 set wildmenu
 set wildmode=list:longest,full
@@ -92,6 +92,7 @@ let g:Tex_DefaultTargetFormat='pdf'
 let g:Tex_FoldedSections = ''
 let g:Tex_GotoError=1
 let g:tex_comment_nospell=1
+let g:Tex_ViewRule_pdf = '/Applications/Preview.app'
 
 "disable placeholders
 "let g:Imap_UsePlaceHolders = 0
@@ -103,6 +104,8 @@ let mapleader = ","
 " Jump to start and end of line using the home row keys
 map H ^
 map L $
+nmap º <C-f>
+nmap ∆ <C-b>
 
 "colorschemes
 colorscheme vimbrant
@@ -118,3 +121,21 @@ execute pathogen#helptags()
 let python_highlight_indent_errors = 0
 let python_highlight_space_errors = 0
 let python_highlight_all = 1
+
+"css3 syntax
+augroup VimCSS3Syntax
+    autocmd!
+
+    autocmd FileType css setlocal iskeyword+=-
+augroup END
+
+
+"Python mode
+let pymode_doc = 0
+let pymode_rope_complete_on_dot = 0
+let g:pymode_rope = 1
+let g:pymode_lint = 1
+let g:pymode_syntax = 1
+let g:pymode_syntax_all = 1
+let g:pymode_syntax_docstrings = g:pymode_syntax_all
+set completeopt=menu "disables docs on autocompete
